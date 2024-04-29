@@ -20,7 +20,7 @@ if (jacocoEnabled.toBoolean()) {
 
 sonarqube {
     properties {
-        property("sonar.projectKey", "MEITREX_scrum_game_ims_api")
+        property("sonar.projectKey", "MEITREX_scrum-game-ims-api")
         property("sonar.organization", "meitrex")
         property("sonar.host.url", "https://sonarcloud.io")
     }
