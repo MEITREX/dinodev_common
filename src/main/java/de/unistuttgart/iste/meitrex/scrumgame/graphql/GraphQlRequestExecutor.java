@@ -1,12 +1,18 @@
 package de.unistuttgart.iste.meitrex.scrumgame.graphql;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kobylynskyi.graphql.codegen.model.graphql.GraphQLOperationRequest;
 import com.kobylynskyi.graphql.codegen.model.graphql.GraphQLRequest;
 import com.kobylynskyi.graphql.codegen.model.graphql.GraphQLResponseProjection;
+import graphql.GraphqlErrorException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.graphql.ResponseError;
+import org.springframework.graphql.client.ClientGraphQlResponse;
 import org.springframework.graphql.client.HttpGraphQlClient;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 @RequiredArgsConstructor
@@ -41,9 +47,27 @@ public class GraphQlRequestExecutor {
 
             return addBearerTokenToClient(graphQlClient)
                     .document(graphQlRequest.toQueryString())
-                    .retrieve(retrievalName)
-                    .toEntity(responseType);
+                    .execute()
+                    .mapNotNull(response -> {
+                        if (response.getErrors().isEmpty()) {
+                            return response.field(retrievalName).toEntity(responseType);
+                        } else {
+                            throw toGraphQlException(response);
+                        }
+                    });
         }
+
+        private static GraphqlErrorException toGraphQlException(ClientGraphQlResponse response) {
+            ResponseError error = response.getErrors().getFirst();
+            return GraphqlErrorException.newErrorException()
+                    .message(error.getMessage())
+                    .path(error.getParsedPath())
+                    .sourceLocations(error.getLocations())
+                    .errorClassification(error.getErrorType())
+                    .extensions(error.getExtensions())
+                    .build();
+        }
+
 
         private HttpGraphQlClient addBearerTokenToClient(HttpGraphQlClient graphQlClient) {
             return graphQlClient.mutate()
