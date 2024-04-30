@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kobylynskyi.graphql.codegen.model.graphql.GraphQLOperationRequest;
 import com.kobylynskyi.graphql.codegen.model.graphql.GraphQLRequest;
 import com.kobylynskyi.graphql.codegen.model.graphql.GraphQLResponseProjection;
+import graphql.ErrorType;
 import graphql.GraphqlErrorException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.ResponseError;
@@ -63,7 +64,7 @@ public class GraphQlRequestExecutor {
                     .message(error.getMessage())
                     .path(error.getParsedPath())
                     .sourceLocations(error.getLocations())
-                    .errorClassification(error.getErrorType())
+                    .errorClassification(ErrorType.DataFetchingException)
                     .extensions(error.getExtensions())
                     .build();
         }
