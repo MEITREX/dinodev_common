@@ -71,6 +71,7 @@ graphqlCodegen {
     fieldsWithResolvers = ["@OnDemand"]
 }
 
+compileJava.dependsOn 'graphqlCodegen'
 sourceSets.main.java.srcDir "$buildDir/generated/scrum-game"
 
 configurations {
