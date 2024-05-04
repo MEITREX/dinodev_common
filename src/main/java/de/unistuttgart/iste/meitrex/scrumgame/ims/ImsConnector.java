@@ -7,8 +7,10 @@ import java.util.*;
 /**
  * The ImsConnector interface provides a set of methods for interacting with issues in the issue management system (IMS).
  * Each method requires an IssueMappingConfiguration object, which is used to map the issue data between the Scrum game and the IMS.
+ * 
+ * @param <C> The type of IssueMappingConfiguration used by the connector.
  */
-public interface ImsConnector {
+public interface ImsConnector<C extends IssueMappingConfiguration> {
 
     /**
      * Retrieves a list of issues for a given Scrum game project.
@@ -17,7 +19,7 @@ public interface ImsConnector {
      * @param mappingConfiguration The configuration used for mapping issue data.
      * @return A list of Issue objects.
      */
-    List<Issue> getIssues(UUID scrumGameProjectId, IssueMappingConfiguration mappingConfiguration);
+    List<Issue> getIssues(UUID scrumGameProjectId, C mappingConfiguration);
 
     /**
      * Finds an issue by its ID.
@@ -26,7 +28,7 @@ public interface ImsConnector {
      * @param mappingConfiguration The configuration used for mapping issue data.
      * @return An Optional containing the Issue if found, or an empty Optional if not.
      */
-    Optional<Issue> findIssue(String id, IssueMappingConfiguration mappingConfiguration);
+    Optional<Issue> findIssue(String id, C mappingConfiguration);
 
     /**
      * Changes the title of an issue.
@@ -36,7 +38,7 @@ public interface ImsConnector {
      * @param mappingConfiguration The configuration used for mapping issue data.
      * @return The updated Issue object.
      */
-    Issue changeIssueTitle(String issueId, String title, IssueMappingConfiguration mappingConfiguration);
+    Issue changeIssueTitle(String issueId, String title, C mappingConfiguration);
 
     /**
      * Changes the description of an issue.
@@ -46,7 +48,7 @@ public interface ImsConnector {
      * @param mappingConfiguration The configuration used for mapping issue data.
      * @return The updated Issue object.
      */
-    Issue changeIssueDescription(String issueId, String description, IssueMappingConfiguration mappingConfiguration);
+    Issue changeIssueDescription(String issueId, String description, C mappingConfiguration);
 
     /**
      * Changes the state of an issue.
@@ -56,7 +58,7 @@ public interface ImsConnector {
      * @param mappingConfiguration The configuration used for mapping issue data.
      * @return The updated Issue object.
      */
-    Issue changeIssueState(String issueId, IssueState issueState, IssueMappingConfiguration mappingConfiguration);
+    Issue changeIssueState(String issueId, IssueState issueState, C mappingConfiguration);
 
     /**
      * Changes the type of an issue.
@@ -66,7 +68,17 @@ public interface ImsConnector {
      * @param mappingConfiguration The configuration used for mapping issue data.
      * @return The updated Issue object.
      */
-    Issue changeIssueType(String issueId, String typeName, IssueMappingConfiguration mappingConfiguration);
+    Issue changeIssueType(String issueId, String typeName, C mappingConfiguration);
+
+    /**
+     * Changes the sprint of an issue.
+     *
+     * @param issueId              The ID of the issue.
+     * @param sprintNumber         The new sprint number for the issue.
+     * @param mappingConfiguration The configuration used for mapping issue data.
+     * @return The updated Issue object.
+     */
+    Issue changeSprintOfIssue(String issueId, Integer sprintNumber, C mappingConfiguration);
 
     /**
      * Assigns an issue to a user.
@@ -76,7 +88,7 @@ public interface ImsConnector {
      * @param mappingConfiguration The configuration used for mapping issue data.
      * @return The updated Issue object.
      */
-    Issue assignIssue(String issueId, UUID assigneeId, IssueMappingConfiguration mappingConfiguration);
+    Issue assignIssue(String issueId, UUID assigneeId, C mappingConfiguration);
 
     /**
      * Creates a new issue in the issue tracking system.
@@ -86,5 +98,5 @@ public interface ImsConnector {
      * @param mappingConfiguration The configuration used for mapping issue data.
      * @return The created Issue object.
      */
-    Issue createIssue(UUID projectId, CreateIssueInput createIssueInput, IssueMappingConfiguration mappingConfiguration);
+    Issue createIssue(UUID projectId, CreateIssueInput createIssueInput, C mappingConfiguration);
 }

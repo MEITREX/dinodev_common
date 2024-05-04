@@ -7,9 +7,12 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/**
+ * Converts IMS issue states to IssueState objects.
+ */
 public class IssueStateConverter {
 
-    private Map<String, IssueState> issueStateMap;
+    private final Map<String, IssueState> issueStateMap;
 
     public IssueStateConverter(List<IssueState> issueStates) {
         this.issueStateMap = issueStates.stream()
