@@ -1,7 +1,6 @@
 package de.unistuttgart.iste.meitrex.scrumgame.ims;
 
-import de.unistuttgart.iste.meitrex.generated.dto.CreateIssueInput;
-import de.unistuttgart.iste.meitrex.generated.dto.Issue;
+import de.unistuttgart.iste.meitrex.generated.dto.*;
 
 import java.util.*;
 
@@ -14,7 +13,7 @@ public interface ImsConnector {
     /**
      * Retrieves a list of issues for a given Scrum game project.
      *
-     * @param scrumGameProjectId The UUID of the Scrum game project.
+     * @param scrumGameProjectId   The UUID of the Scrum game project.
      * @param mappingConfiguration The configuration used for mapping issue data.
      * @return A list of Issue objects.
      */
@@ -23,7 +22,7 @@ public interface ImsConnector {
     /**
      * Finds an issue by its ID.
      *
-     * @param id The ID of the issue.
+     * @param id                   The ID of the issue.
      * @param mappingConfiguration The configuration used for mapping issue data.
      * @return An Optional containing the Issue if found, or an empty Optional if not.
      */
@@ -32,8 +31,8 @@ public interface ImsConnector {
     /**
      * Changes the title of an issue.
      *
-     * @param issueId The ID of the issue.
-     * @param title The new title for the issue.
+     * @param issueId              The ID of the issue.
+     * @param title                The new title for the issue.
      * @param mappingConfiguration The configuration used for mapping issue data.
      * @return The updated Issue object.
      */
@@ -42,8 +41,8 @@ public interface ImsConnector {
     /**
      * Changes the description of an issue.
      *
-     * @param issueId The ID of the issue.
-     * @param description The new description for the issue.
+     * @param issueId              The ID of the issue.
+     * @param description          The new description for the issue.
      * @param mappingConfiguration The configuration used for mapping issue data.
      * @return The updated Issue object.
      */
@@ -52,18 +51,18 @@ public interface ImsConnector {
     /**
      * Changes the state of an issue.
      *
-     * @param issueId The ID of the issue.
-     * @param stateName The new state for the issue.
+     * @param issueId              The ID of the issue.
+     * @param issueState           The new state for the issue.
      * @param mappingConfiguration The configuration used for mapping issue data.
      * @return The updated Issue object.
      */
-    Issue changeIssueState(String issueId, String stateName, IssueMappingConfiguration mappingConfiguration);
+    Issue changeIssueState(String issueId, IssueState issueState, IssueMappingConfiguration mappingConfiguration);
 
     /**
      * Changes the type of an issue.
      *
-     * @param issueId The ID of the issue.
-     * @param typeName The new type for the issue.
+     * @param issueId              The ID of the issue.
+     * @param typeName             The new type for the issue.
      * @param mappingConfiguration The configuration used for mapping issue data.
      * @return The updated Issue object.
      */
@@ -72,8 +71,8 @@ public interface ImsConnector {
     /**
      * Assigns an issue to a user.
      *
-     * @param issueId The ID of the issue.
-     * @param assigneeId The UUID of the user to assign the issue to.
+     * @param issueId              The ID of the issue.
+     * @param assigneeId           The UUID of the user to assign the issue to.
      * @param mappingConfiguration The configuration used for mapping issue data.
      * @return The updated Issue object.
      */
@@ -82,8 +81,8 @@ public interface ImsConnector {
     /**
      * Creates a new issue in the issue tracking system.
      *
-     * @param projectId The UUID of the Scrum game project.
-     * @param createIssueInput The data for the new issue.
+     * @param projectId            The UUID of the Scrum game project.
+     * @param createIssueInput     The data for the new issue.
      * @param mappingConfiguration The configuration used for mapping issue data.
      * @return The created Issue object.
      */
