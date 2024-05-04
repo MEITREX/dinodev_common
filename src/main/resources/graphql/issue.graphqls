@@ -8,6 +8,11 @@ type Issue {
     id: ID!
 
     """
+    Unique identifier of the scrum game the issue belongs to.
+    """
+    projectId: UUID!
+
+    """
     Title of the issue, providing a brief summary.
     """
     title: String!
