@@ -1,6 +1,6 @@
 package de.unistuttgart.iste.meitrex.scrumgame.ims;
 
-import de.unistuttgart.iste.meitrex.scrumgame.ims.dto.IssueState;
+import de.unistuttgart.iste.meitrex.generated.dto.IssueState;
 
 import java.util.List;
 import java.util.Map;
