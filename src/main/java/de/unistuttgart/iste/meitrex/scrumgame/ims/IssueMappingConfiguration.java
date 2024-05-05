@@ -37,4 +37,11 @@ public interface IssueMappingConfiguration {
      */
     UserIdMapping userIdMapping();
 
+    /**
+     * Get the issue priority mapping for this configuration, used to map issue priorities between the Scrum Game and the IMS.
+     *
+     * @return The issue priority mapping.
+     */
+    IssuePriorityMapping issuePriorityMapping();
+
 }
