@@ -91,6 +91,16 @@ public interface ImsConnector<C extends IssueMappingConfiguration> {
     Issue assignIssue(String issueId, UUID assigneeId, C mappingConfiguration);
 
     /**
+     * Adds a comment to an issue.
+     *
+     * @param issueId              The ID of the issue.
+     * @param comment              The comment to add, possibly markdown-formatted.
+     * @param mappingConfiguration The configuration used for mapping issue data.
+     * @return The updated Issue object.
+     */
+    Issue addCommentToIssue(String issueId, String comment, C mappingConfiguration);
+
+    /**
      * Creates a new issue in the issue tracking system.
      *
      * @param projectId            The UUID of the Scrum game project.
