@@ -33,6 +33,11 @@ type Issue {
     type: IssueType!
 
     """
+    Priority of the issue.
+    """
+    priority: IssuePriority!
+
+    """
     Sprint number associated with the issue, if applicable.
     """
     sprintNumber: Int
@@ -52,6 +57,15 @@ type Issue {
     List of user UUIDs representing the assignees of the issue.
     """
     assigneeIds: [UUID!]!
+}
+
+"""
+Enumeration of priorities for issues.
+"""
+enum IssuePriority {
+    LOW
+    MEDIUM
+    HIGH
 }
 
 """
