@@ -61,6 +61,16 @@ public interface ImsConnector<C extends IssueMappingConfiguration> {
     Issue changeIssueState(String issueId, IssueState issueState, C mappingConfiguration);
 
     /**
+     * Changes the priority of an issue.
+     *
+     * @param issueId              The ID of the issue.
+     * @param priority             The new priority for the issue.
+     * @param mappingConfiguration The configuration used for mapping issue data.
+     * @return The updated Issue object.
+     */
+    Issue changeIssuePriority(String issueId, IssuePriority priority, C mappingConfiguration);
+
+    /**
      * Changes the type of an issue.
      *
      * @param issueId              The ID of the issue.
