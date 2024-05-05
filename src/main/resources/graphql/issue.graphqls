@@ -38,9 +38,31 @@ type Issue {
     sprintNumber: Int
 
     """
+    Story points associated with the issue. If not set, the issue is considered to not have an estimation yet.
+    Might also be calculated based on the effort estimation.
+    """
+    storyPoints: Int
+
+    """
+    Effort estimation associated with the issue. If not set, the issue is considered to not have an estimation yet.
+    """
+    effortEstimation: TShirtSizeEstimation
+
+    """
     List of user UUIDs representing the assignees of the issue.
     """
     assigneeIds: [UUID!]!
+}
+
+"""
+Enumeration of possible sizes for a T-shirt estimation.
+"""
+enum TShirtSizeEstimation {
+    XS
+    S
+    M
+    L
+    XL
 }
 
 """
