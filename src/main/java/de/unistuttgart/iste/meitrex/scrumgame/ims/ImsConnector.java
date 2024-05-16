@@ -33,12 +33,14 @@ public interface ImsConnector<C extends IssueMappingConfiguration> {
 
     /**
      * Retrieves a list of events that have occurred in the ims project.
+     * The events are returned as CreateEventInput objects, because they are used
+     * to create events in the Scrum game.
      *
      * @param since                The timestamp to retrieve events since.
      * @param mappingConfiguration The configuration used for mapping issue data.
-     * @return A list of Event objects.
+     * @return A list of Event objects as CreateEventInput.
      */
-    List<Event> getEvents(OffsetDateTime since, C mappingConfiguration);
+    List<CreateEventInput> getEvents(OffsetDateTime since, C mappingConfiguration);
 
     /**
      * Retrieves a list of events that have occurred in the ims project for a specific issue.
@@ -48,7 +50,7 @@ public interface ImsConnector<C extends IssueMappingConfiguration> {
      * @param mappingConfiguration The configuration used for mapping issue data.
      * @return A list of Event objects.
      */
-    List<Event> getEventsForIssue(String issueId, OffsetDateTime since, C mappingConfiguration);
+    List<CreateEventInput> getEventsForIssue(String issueId, OffsetDateTime since, C mappingConfiguration);
 
     /**
      * Changes the title of an issue.
