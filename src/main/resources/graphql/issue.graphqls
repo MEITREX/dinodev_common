@@ -57,6 +57,11 @@ type Issue {
     List of user UUIDs representing the assignees of the issue.
     """
     assigneeIds: [UUID!]!
+
+    """
+    List of events / timeline items of the issue.
+    """
+    issueEvents: [Event!]! @OnDemand
 }
 
 """

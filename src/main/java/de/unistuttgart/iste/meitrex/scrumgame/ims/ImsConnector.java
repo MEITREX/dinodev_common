@@ -2,12 +2,13 @@ package de.unistuttgart.iste.meitrex.scrumgame.ims;
 
 import de.unistuttgart.iste.meitrex.generated.dto.*;
 
+import java.time.OffsetDateTime;
 import java.util.*;
 
 /**
  * The ImsConnector interface provides a set of methods for interacting with issues in the issue management system (IMS).
  * Each method requires an IssueMappingConfiguration object, which is used to map the issue data between the Scrum game and the IMS.
- * 
+ *
  * @param <C> The type of IssueMappingConfiguration used by the connector.
  */
 public interface ImsConnector<C extends IssueMappingConfiguration> {
@@ -29,6 +30,25 @@ public interface ImsConnector<C extends IssueMappingConfiguration> {
      * @return An Optional containing the Issue if found, or an empty Optional if not.
      */
     Optional<Issue> findIssue(String id, C mappingConfiguration);
+
+    /**
+     * Retrieves a list of events that have occurred in the ims project.
+     *
+     * @param since                The timestamp to retrieve events since.
+     * @param mappingConfiguration The configuration used for mapping issue data.
+     * @return A list of Event objects.
+     */
+    List<Event> getEvents(OffsetDateTime since, C mappingConfiguration);
+
+    /**
+     * Retrieves a list of events that have occurred in the ims project for a specific issue.
+     *
+     * @param issueId              The ID of the issue.
+     * @param since                The timestamp to retrieve events since.
+     * @param mappingConfiguration The configuration used for mapping issue data.
+     * @return A list of Event objects.
+     */
+    List<Event> getEventsForIssue(String issueId, OffsetDateTime since, C mappingConfiguration);
 
     /**
      * Changes the title of an issue.
