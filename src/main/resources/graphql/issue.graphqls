@@ -61,7 +61,7 @@ type Issue {
     """
     List of events / timeline items of the issue.
     """
-    issueEvents: [Event!]!
+    issueEvents: [Event!]! @OnDemand
 }
 
 """
