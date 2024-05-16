@@ -86,7 +86,11 @@ repositories {
 }
 
 dependencies {
-    implementation 'de.unistuttgart.iste.meitrex:meitrex-common:1.0.3'
+    implementation('de.unistuttgart.iste.meitrex:meitrex-common') {
+        version {
+            branch = 'main'
+        }
+    }
     implementation('de.unistuttgart.iste.meitrex:gamification_engine') {
         version {
             branch = 'main'
