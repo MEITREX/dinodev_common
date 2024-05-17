@@ -13,7 +13,7 @@ public class ImsEventTypes {
 
     private static final List<FieldSchemaDefinition> DEFAULT_ISSUE_DATA = List.of(
             DefaultFieldSchemaDefinition.builder()
-                    .setName("issueKey")
+                    .setName("issueId")
                     .setType(AllowedDataType.STRING)
                     .setDescription("The key of the issue.")
                     .setRequired(true)
@@ -48,9 +48,15 @@ public class ImsEventTypes {
                                             .setType(AllowedDataType.STRING)
                                             .setDescription("The ID of the assignee.")
                                             .setRequired(true)
-                                            .build()))
+                                            .build(),
+                                    DefaultFieldSchemaDefinition.builder()
+                                            .setName("assigneeName")
+                                            .setType(AllowedDataType.STRING)
+                                            .setDescription("The name of the assignee.")
+                                            .setRequired(true)
+                                            .build()))  
                     .build())
-            .setMessageTemplate("assigned issue '${issueTitle}' to ${assigneeId}.")
+            .setMessageTemplate("assigned issue '${issueTitle}' to ${assigneeName}.")
             .build();
 
     /**
@@ -59,7 +65,7 @@ public class ImsEventTypes {
     public static final EventType UNASSIGNED_ISSUE = DefaultEventType.builder()
             .setIdentifier("UNASSIGNED_ISSUE")
             .setDescription("An issue was unassigned.")
-            .setDefaultVisibility(EventVisibility.PUBLIC)
+            .setDefaultVisibility(EventVisibility.DETAIL)
             .setEventSchema(DefaultSchemaDefinition.builder()
                     .setFields(DEFAULT_ISSUE_DATA)
                     .build())
@@ -72,7 +78,7 @@ public class ImsEventTypes {
     public static final EventType COMMENT_ON_ISSUE = DefaultEventType.builder()
             .setIdentifier("COMMENT_ON_ISSUE")
             .setDescription("A comment was added to an issue.")
-            .setDefaultVisibility(EventVisibility.PRIVATE)
+            .setDefaultVisibility(EventVisibility.PUBLIC)
             .setEventSchema(DefaultSchemaDefinition.builder()
                     .setFields(
                             concat(
@@ -94,7 +100,7 @@ public class ImsEventTypes {
     public static final EventType START_PROGRESS = DefaultEventType.builder()
             .setIdentifier("START_PROGRESS")
             .setDescription("An issue was started.")
-            .setDefaultVisibility(EventVisibility.PUBLIC)
+            .setDefaultVisibility(EventVisibility.DETAIL)
             .setEventSchema(DefaultSchemaDefinition.builder()
                     .setFields(DEFAULT_ISSUE_DATA)
                     .build())
@@ -126,7 +132,7 @@ public class ImsEventTypes {
             .setEventSchema(DefaultSchemaDefinition.builder()
                     .setFields(DEFAULT_ISSUE_DATA)
                     .build())
-            .setMessageTemplate("The issue '${issueKey}' was removed from the sprint '${sprintName}'.")
+            .setMessageTemplate("The issue '${issueTitle}' was removed from the sprint.")
             .build();
 
     /**
@@ -139,7 +145,7 @@ public class ImsEventTypes {
             .setEventSchema(DefaultSchemaDefinition.builder()
                     .setFields(DEFAULT_ISSUE_DATA)
                     .build())
-            .setMessageTemplate("completed the issue '${issueKey}'! Great job!")
+            .setMessageTemplate("completed the issue '${issueTitle}'! Great job!")
             .build();
 
     /**
@@ -153,7 +159,7 @@ public class ImsEventTypes {
             .setEventSchema(DefaultSchemaDefinition.builder()
                     .setFields(DEFAULT_ISSUE_DATA)
                     .build())
-            .setMessageTemplate("reopened the issue '${issueKey}'.")
+            .setMessageTemplate("reopened the issue '${issueTitle}'.")
             .build();
 
     /**
@@ -166,7 +172,7 @@ public class ImsEventTypes {
             .setEventSchema(DefaultSchemaDefinition.builder()
                     .setFields(DEFAULT_ISSUE_DATA)
                     .build())
-            .setMessageTemplate("created the issue '${issueKey}'.")
+            .setMessageTemplate("created the issue '${issueTitle}'.")
             .build();
 
     /**
@@ -175,11 +181,11 @@ public class ImsEventTypes {
     public static final EventType ISSUE_UPDATED = DefaultEventType.builder()
             .setIdentifier("ISSUE_UPDATED")
             .setDescription("An issue was updated.")
-            .setDefaultVisibility(EventVisibility.PRIVATE)
+            .setDefaultVisibility(EventVisibility.DETAIL)
             .setEventSchema(DefaultSchemaDefinition.builder()
                     .setFields(DEFAULT_ISSUE_DATA)
                     .build())
-            .setMessageTemplate("updated the issue '${issueKey}'.")
+            .setMessageTemplate("updated the issue '${issueTitle}'.")
             .build();
 
     /**
