@@ -32,23 +32,14 @@ public interface ImsConnector<C extends IssueMappingConfiguration> {
     Optional<Issue> findIssue(String id, C mappingConfiguration);
 
     /**
-     * Retrieves a list of events that have occurred in the ims project.
-     * The events are returned as CreateEventInput objects, because they are used
-     * to create events in the Scrum game.
-     *
-     * @param since                The timestamp to retrieve events since.
-     * @param mappingConfiguration The configuration used for mapping issue data.
-     * @return A list of Event objects as CreateEventInput.
-     */
-    List<CreateEventInput> getEvents(OffsetDateTime since, C mappingConfiguration);
-
-    /**
      * Retrieves a list of events that have occurred in the ims project for a specific issue.
+     * Returns only events that have occurred since the given timestamp.
+     * The events are CreateEventInputs, which are used to create events in the Scrum game.
      *
      * @param issueId              The ID of the issue.
      * @param since                The timestamp to retrieve events since.
      * @param mappingConfiguration The configuration used for mapping issue data.
-     * @return A list of Event objects.
+     * @return A list of create event inputs.
      */
     List<CreateEventInput> getEventsForIssue(String issueId, OffsetDateTime since, C mappingConfiguration);
 
@@ -111,6 +102,16 @@ public interface ImsConnector<C extends IssueMappingConfiguration> {
      * @return The updated Issue object.
      */
     Issue changeSprintOfIssue(String issueId, Integer sprintNumber, C mappingConfiguration);
+
+    /**
+     * Changes the estimation of an issue.
+     *
+     * @param issueId              The ID of the issue.
+     * @param estimation           The new estimation for the issue.
+     * @param mappingConfiguration The configuration used for mapping issue data.
+     * @return The updated Issue object.
+     */
+    Issue changeEstimationOfIssue(String issueId, TShirtSizeEstimation estimation, C mappingConfiguration);
 
     /**
      * Assigns an issue to a user.
