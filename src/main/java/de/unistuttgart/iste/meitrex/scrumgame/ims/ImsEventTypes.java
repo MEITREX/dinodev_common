@@ -104,7 +104,7 @@ public class ImsEventTypes {
             .setEventSchema(DefaultSchemaDefinition.builder()
                     .setFields(DEFAULT_ISSUE_DATA)
                     .build())
-            .setMessageTemplate("started working on the issue '${issueTitle}'.")
+            .setMessageTemplate("moved the issue '${issueTitle}' in progress.")
             .build();
 
     /**
@@ -132,7 +132,7 @@ public class ImsEventTypes {
             .setEventSchema(DefaultSchemaDefinition.builder()
                     .setFields(DEFAULT_ISSUE_DATA)
                     .build())
-            .setMessageTemplate("The issue '${issueTitle}' was removed from the sprint.")
+            .setMessageTemplate("removed '${issueTitle}' from the sprint.")
             .build();
 
     /**
