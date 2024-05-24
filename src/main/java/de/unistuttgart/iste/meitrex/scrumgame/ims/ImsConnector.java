@@ -1,6 +1,7 @@
 package de.unistuttgart.iste.meitrex.scrumgame.ims;
 
 import de.unistuttgart.iste.meitrex.generated.dto.*;
+import org.springframework.lang.Nullable;
 
 import java.time.OffsetDateTime;
 import java.util.*;
@@ -30,9 +31,9 @@ public interface ImsConnector {
      * Finds a list of issues by their IDs.
      *
      * @param ids The IDs of the issues.
-     * @return A list of Issue objects.
+     * @return A list of Issue objects with null entries for IDs that were not found.
      */
-    List<Optional<Issue>> findIssuesBatched(List<String> ids);
+    List<Issue> findIssuesBatched(List<String> ids);
 
     /**
      * Retrieves a list of events that have occurred in the ims project for a specific issue.
