@@ -98,7 +98,7 @@ public interface ImsConnector {
      * @param sprintNumber The new sprint number for the issue.
      * @return The updated Issue object.
      */
-    Issue changeSprintOfIssue(String issueId, Integer sprintNumber);
+    Issue changeSprintOfIssue(String issueId, @Nullable Integer sprintNumber);
 
     /**
      * Changes the estimation of an issue.
@@ -130,9 +130,8 @@ public interface ImsConnector {
     /**
      * Creates a new issue in the issue tracking system.
      *
-     * @param projectId        The UUID of the Scrum game project.
      * @param createIssueInput The data for the new issue.
      * @return The created Issue object.
      */
-    Issue createIssue(UUID projectId, CreateIssueInput createIssueInput);
+    Issue createIssue(CreateIssueInput createIssueInput);
 }
