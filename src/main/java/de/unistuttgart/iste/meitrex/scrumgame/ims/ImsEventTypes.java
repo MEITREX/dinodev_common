@@ -11,7 +11,7 @@ import java.util.*;
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class ImsEventTypes {
 
-    private static final List<FieldSchemaDefinition> DEFAULT_ISSUE_DATA = List.of(
+    private static final List<DefaultFieldSchemaDefinition> DEFAULT_ISSUE_DATA = List.of(
             DefaultFieldSchemaDefinition.builder()
                     .setName("issueId")
                     .setType(AllowedDataType.STRING)
@@ -25,9 +25,8 @@ public class ImsEventTypes {
                     .setRequired(true)
                     .build());
 
-    @SafeVarargs
-    private static <T> List<T> concat(List<T> list1, T... otherElements) {
-        List<T> result = new ArrayList<>(list1);
+    private static List<DefaultFieldSchemaDefinition> defaultDataAnd(DefaultFieldSchemaDefinition... otherElements) {
+        List<DefaultFieldSchemaDefinition> result = new ArrayList<>(ImsEventTypes.DEFAULT_ISSUE_DATA);
         Collections.addAll(result, otherElements);
         return result;
     }
@@ -41,8 +40,7 @@ public class ImsEventTypes {
             .setDefaultVisibility(EventVisibility.PUBLIC)
             .setEventSchema(DefaultSchemaDefinition.builder()
                     .setFields(
-                            concat(
-                                    DEFAULT_ISSUE_DATA,
+                            defaultDataAnd(
                                     DefaultFieldSchemaDefinition.builder()
                                             .setName("assigneeId")
                                             .setType(AllowedDataType.STRING)
@@ -81,8 +79,7 @@ public class ImsEventTypes {
             .setDefaultVisibility(EventVisibility.PUBLIC)
             .setEventSchema(DefaultSchemaDefinition.builder()
                     .setFields(
-                            concat(
-                                    DEFAULT_ISSUE_DATA,
+                            defaultDataAnd(
                                     DefaultFieldSchemaDefinition.builder()
                                             .setName("comment")
                                             .setType(AllowedDataType.STRING)
