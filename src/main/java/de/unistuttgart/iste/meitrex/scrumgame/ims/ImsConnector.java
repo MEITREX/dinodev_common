@@ -121,11 +121,12 @@ public interface ImsConnector {
     /**
      * Adds a comment to an issue.
      *
-     * @param issueId The ID of the issue.
-     * @param comment The comment to add, possibly markdown-formatted.
+     * @param issueId               The ID of the issue.
+     * @param comment               The comment to add, possibly markdown-formatted.
+     * @param optionalParentIssueId The ID of the parent issue, if the comment is a reply to another comment.
      * @return The updated Issue object.
      */
-    Issue addCommentToIssue(String issueId, String comment);
+    Issue addCommentToIssue(String issueId, String comment, String optionalParentIssueId);
 
     /**
      * Creates a new issue in the issue tracking system.

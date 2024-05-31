@@ -73,6 +73,7 @@ public class ImsEventTypes {
     /**
      * Event type for when a comment is added to an issue.
      */
+    @Deprecated
     public static final EventType COMMENT_ON_ISSUE = DefaultEventType.builder()
             .setIdentifier("COMMENT_ON_ISSUE")
             .setDescription("A comment was added to an issue.")
