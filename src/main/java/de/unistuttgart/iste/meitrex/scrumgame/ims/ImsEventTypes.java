@@ -23,6 +23,18 @@ public class ImsEventTypes {
                     .setType(AllowedDataType.STRING)
                     .setDescription("The title of the issue.")
                     .setRequired(true)
+                    .build(),
+            DefaultFieldSchemaDefinition.builder()
+                    .setName("assigneeIds")
+                    .setType(AllowedDataType.STRING)
+                    .setDescription("The ids of the currently assigned users, separated by comma.")
+                    .setRequired(true)
+                    .build(),
+            DefaultFieldSchemaDefinition.builder()
+                    .setName("assigneeNames")
+                    .setType(AllowedDataType.STRING)
+                    .setDescription("The currently assigned users, separated by comma.")
+                    .setRequired(true)
                     .build());
 
     private static List<DefaultFieldSchemaDefinition> defaultDataAnd(DefaultFieldSchemaDefinition... otherElements) {
@@ -65,15 +77,26 @@ public class ImsEventTypes {
             .setDescription("An issue was unassigned.")
             .setDefaultVisibility(EventVisibility.DETAIL)
             .setEventSchema(DefaultSchemaDefinition.builder()
-                    .setFields(DEFAULT_ISSUE_DATA)
+                    .setFields(defaultDataAnd(
+                            DefaultFieldSchemaDefinition.builder()
+                                    .setName("assigneeId")
+                                    .setType(AllowedDataType.STRING)
+                                    .setDescription("The ID of the assignee.")
+                                    .setRequired(true)
+                                    .build(),
+                            DefaultFieldSchemaDefinition.builder()
+                                    .setName("assigneeName")
+                                    .setType(AllowedDataType.STRING)
+                                    .setDescription("The name of the assignee.")
+                                    .setRequired(true)
+                                    .build()))
                     .build())
-            .setMessageTemplate("removed the assignment from the issue '${issueTitle}'.")
+            .setMessageTemplate("removed the assignment of ${assigneeName} from the issue '${issueTitle}'.")
             .build();
 
     /**
      * Event type for when a comment is added to an issue.
      */
-    @Deprecated
     public static final EventType COMMENT_ON_ISSUE = DefaultEventType.builder()
             .setIdentifier("COMMENT_ON_ISSUE")
             .setDescription("A comment was added to an issue.")
