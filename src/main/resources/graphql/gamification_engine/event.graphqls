@@ -34,7 +34,7 @@ interface Event {
 
 type DefaultEvent implements Event {
     id: UUID!
-    eventType: EventType!
+    eventType: DefaultEventType!
     visibility: EventVisibility!
     userId: UUID
     visibleToUserIds: [UUID!]!
@@ -42,9 +42,9 @@ type DefaultEvent implements Event {
     timestamp: DateTime!
     message: String!
     mostRecentChildTimestamp: DateTime!
-    parent: Event
+    parent: DefaultEvent
     eventData: [DefaultTemplateField!]!
-    children: [Event!]! @OnDemand
+    children: [DefaultEvent!]! @OnDemand
 }
 
 input CreateEventInput {
@@ -57,6 +57,7 @@ input CreateEventInput {
     projectId: UUID
     eventData: [TemplateFieldInput!]!
     parentId: UUID
+    visibleToUserIds: [UUID!] = []
 }
 
 interface EventType {
@@ -71,26 +72,26 @@ type DefaultEventType implements EventType {
     identifier: String!
     description: String
     defaultVisibility: EventVisibility!
-    eventSchema: SchemaDefinition!
+    eventSchema: DefaultSchemaDefinition!
     messageTemplate: String!
 }
 
 interface TemplateField {
     key: String!
     type: AllowedDataType!
-    value: String!
+    value: String
 }
 
 type DefaultTemplateField implements TemplateField {
     key: String!
     type: AllowedDataType!
-    value: String!
+    value: String
 }
 
 input TemplateFieldInput {
     key: String!
     type: AllowedDataType!
-    value: String!
+    value: String
 }
 
 interface SchemaDefinition {
@@ -98,7 +99,7 @@ interface SchemaDefinition {
 }
 
 type DefaultSchemaDefinition implements SchemaDefinition {
-    fields: [FieldSchemaDefinition!]!
+    fields: [DefaultFieldSchemaDefinition!]!
 }
 
 interface FieldSchemaDefinition {
