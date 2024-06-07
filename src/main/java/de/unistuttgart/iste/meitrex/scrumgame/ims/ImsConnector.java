@@ -47,6 +47,17 @@ public interface ImsConnector {
     List<CreateEventInput> getEventsForIssue(String issueId, OffsetDateTime since);
 
     /**
+     * Retrieves a list of events that have occurred in the ims project for a specific project.
+     * Returns only events that have occurred since the given timestamp.
+     * The events are CreateEventInputs, which are used to create events in the Scrum game.
+     *
+     * @param projectId The ID of the project.
+     * @param since     The timestamp to retrieve events since.
+     * @return A list of create event inputs.
+     */
+    List<CreateEventInput> getEventsForProject(UUID projectId, OffsetDateTime since);
+
+    /**
      * Changes the title of an issue.
      *
      * @param issueId The ID of the issue.
