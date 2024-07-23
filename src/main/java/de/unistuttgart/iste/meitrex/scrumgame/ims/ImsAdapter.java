@@ -7,17 +7,17 @@ import java.time.OffsetDateTime;
 import java.util.*;
 
 /**
- * The ImsConnector interface provides a set of methods for interacting with issues in the issue management system (IMS).
+ * The ImsAdapter interface provides a set of methods for interacting with issues in the issue management system (IMS).
  */
-public interface ImsConnector {
+public interface ImsAdapter {
 
     /**
-     * Retrieves a list of issues for a given Scrum game project.
+     * Retrieves a list of issues for a given DinoDev project.
      *
-     * @param scrumGameProjectId The UUID of the Scrum game project.
+     * @param dinodevProjectId The UUID of the DinoDev project.
      * @return A list of Issue objects.
      */
-    List<Issue> getIssues(UUID scrumGameProjectId);
+    List<Issue> getIssues(UUID dinodevProjectId);
 
     /**
      * Finds an issue by its ID.
@@ -38,7 +38,7 @@ public interface ImsConnector {
     /**
      * Retrieves a list of events that have occurred in the ims project for a specific issue.
      * Returns only events that have occurred since the given timestamp.
-     * The events are CreateEventInputs, which are used to create events in the Scrum game.
+     * The events are CreateEventInputs, which are used to create events in the DinoDev.
      *
      * @param issueId The ID of the issue.
      * @param since   The timestamp to retrieve events since.
@@ -49,7 +49,7 @@ public interface ImsConnector {
     /**
      * Retrieves a list of events that have occurred in the ims project for a specific project.
      * Returns only events that have occurred since the given timestamp.
-     * The events are CreateEventInputs, which are used to create events in the Scrum game.
+     * The events are CreateEventInputs, which are used to create events in the DinoDev.
      *
      * @param projectId The ID of the project.
      * @param since     The timestamp to retrieve events since.
@@ -140,7 +140,7 @@ public interface ImsConnector {
     Issue addCommentToIssue(String issueId, String comment, String optionalParentIssueId);
 
     /**
-     * Creates a new issue in the issue tracking system.
+     * Creates a new issue in the IMS.
      *
      * @param createIssueInput The data for the new issue.
      * @return The created Issue object.

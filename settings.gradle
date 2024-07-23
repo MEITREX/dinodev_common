@@ -1,4 +1,4 @@
-rootProject.name = 'scrum-game-ims-api'
+rootProject.name = 'dinodev_common'
 
 sourceControl {
     gitRepository(uri('https://github.com/MEITREX/common')) {
@@ -7,7 +7,7 @@ sourceControl {
     gitRepository(uri('https://github.com/MEITREX/common_test')) {
         producesModule('de.unistuttgart.iste.meitrex:meitrex-common-test')
     }
-    gitRepository(uri('https://github.com/MEITREX/gamification_engine')) {
+    gitRepository(uri('https://github.com/MEITREX/dinodev_gamification_engine')) {
         producesModule('de.unistuttgart.iste.meitrex:gamification_engine')
     }
 }
