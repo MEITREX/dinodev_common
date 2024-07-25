@@ -40,8 +40,8 @@ public class TemplateDataUtils {
                 .build();
     }
 
-    public static TemplateFieldInput stringField(String key, String value) {
-        return TemplateFieldInput.builder()
+    public static DataFieldInput stringField(String key, String value) {
+        return DataFieldInput.builder()
                 .setType(AllowedDataType.STRING)
                 .setKey(key)
                 .setValue(value)
